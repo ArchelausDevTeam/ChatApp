@@ -1,14 +1,17 @@
 class GroupsController < ApplicationController
   def show
-      @group = Group.find_by(id: params[:id])
+    @group = Group.find_by(id: params[:id])
+    @group_channels = Channel.joins(:groups).where('group_id = ?', @group)
+    
   end
 
   def index
     @groups = Group.all
+    @user_groups = Group.joins(:user).where('user_id = ?', current_user.id)
   end
 
   def new
-  @test = Group.new
+  @group = Group.new
   end
 
   def create

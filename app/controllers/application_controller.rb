@@ -3,5 +3,6 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(user)
   	user_groups_path(current_user.id)
+  	#channels_path
   end
 end

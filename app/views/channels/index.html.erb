@@ -7,5 +7,7 @@
 <p><%= link_to 'New channel', new_channel_path %></p>
 
 <ul>
-  <%= render @channels %>
+  <% @group_channels.each do |gc| %>
+  	<li><%= link_to gc.title, channel_path(gc.id) %></li>
+  <% end %>
 </ul>
