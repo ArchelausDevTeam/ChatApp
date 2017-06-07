@@ -11,10 +11,12 @@ class GroupsController < ApplicationController
   end
 
   def new
-  @group = Group.new
+    @user = User.find_by(params[:id])
+    @group = Group.new
   end
 
   def create
+    @user = User.find_by(params[:id])
     @group= current_user.groups.build(group_params)
     if @group.save
       flash[:success] = 'Group added!'
@@ -27,6 +29,6 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:title)
+    params.require(:group).permit(:title, :user_id)
   end
 end
