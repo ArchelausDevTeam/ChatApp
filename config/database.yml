@@ -25,9 +25,10 @@ test:
   database: chat_appTest
 
 production:
- adapter: mysql2
+  adapter: mysql2
   encoding: utf8
   pool: 5
+  database: chat_app
   username: chat_app
   password: chat_app
   host: 223.27.22.124
