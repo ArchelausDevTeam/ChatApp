@@ -25,5 +25,10 @@ test:
   database: chat_appTest
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+ adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: chat_app
+  password: chat_app
+  host: 223.27.22.124
+  port: 3306
