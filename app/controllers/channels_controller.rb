@@ -7,8 +7,8 @@ class ChannelsController < ApplicationController
       @id = ug.id
     end
     
-      @group = Group.find(@id)
-      @group_channels = Channel.joins(:groups).where('group_id = ?', @group.id)
+    @group = Group.find(@id)
+    @group_channels = Channel.joins(:groups).where('group_id = ?', @group.id)
   end
 
   def new
