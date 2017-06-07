@@ -38,6 +38,15 @@ class ChannelsController < ApplicationController
     @channels = Channel.all
     @channel = Channel.includes(:messages).find_by(id: params[:id])
     @message = Message.new
+
+    @user_groups = Group.joins(:user).where('user_id = ?', current_user.id)
+    
+    @user_groups.each do |ug|
+      @id = ug.id
+    end
+
+    @group = Group.find(@id)
+    @group_channels = Channel.joins(:groups).where('group_id = ?', @group.id)
   end
 
   private
