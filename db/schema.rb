@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606012040) do
+ActiveRecord::Schema.define(version: 20170606052346) do
 
   create_table "channels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -18,6 +18,15 @@ ActiveRecord::Schema.define(version: 20170606012040) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_channels_on_user_id", using: :btree
+  end
+
+  create_table "group_channels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "group_id"
+    t.integer  "channel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_group_channels_on_channel_id", using: :btree
+    t.index ["group_id"], name: "index_group_channels_on_group_id", using: :btree
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -38,6 +47,15 @@ ActiveRecord::Schema.define(version: 20170606012040) do
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
+  create_table "user_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_user_groups_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_user_groups_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -56,7 +74,11 @@ ActiveRecord::Schema.define(version: 20170606012040) do
   end
 
   add_foreign_key "channels", "users"
+  add_foreign_key "group_channels", "channels"
+  add_foreign_key "group_channels", "groups"
   add_foreign_key "groups", "users"
   add_foreign_key "messages", "channels"
   add_foreign_key "messages", "users"
+  add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "users"
 end

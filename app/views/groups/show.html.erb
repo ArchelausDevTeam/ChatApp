@@ -3,3 +3,13 @@
 <% end %>
 
 <h5><%= @group.title %></h5>
+
+<h1>Channels</h1>
+
+<p><%= link_to 'New channel', new_channel_path %></p>
+
+<ul>
+  <% @group_channels.each do |gc| %>
+  	<li><%= link_to gc.title, channel_path(gc.id) %></li>
+  <% end %>
+</ul>
