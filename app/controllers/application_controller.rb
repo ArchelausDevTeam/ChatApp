@@ -5,4 +5,5 @@ class ApplicationController < ActionController::Base
   	user_groups_path(current_user.id)
   	#channels_path
   end
+  
 end
