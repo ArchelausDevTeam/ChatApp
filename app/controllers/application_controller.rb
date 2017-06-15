@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   end
 
   def remove_cache_storage
-    response.headers["Cache-Control"] = "no-cache, no-store, max-age=180, must-revalidate"
-    response.headers["Pragma"] = "no-cache"
+    #response.headers["Cache-Control"] = "no-cache, no-store, max-age=180, must-revalidate"
+    #response.headers["Pragma"] = "no-cache"
   end
   
 end
