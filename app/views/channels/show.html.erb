@@ -1,0 +1,40 @@
+
+
+<% content_for :side_bar do %>
+  <div class="col m3 #f18805 height" id="channel-panel">
+    <div class="card">
+      <div class="card-content">
+      <span class="card-title"><%= $group.title %></span> 
+      <small>Channels</small>
+        <ul class="collection">
+	        <% @group_channels.each do |gc| %>
+  		      <li class="collection-item"><%= link_to gc.title, channel_path(gc.id) %></li>
+  		    <% end %>
+	      </ul>
+      </div>
+    </div>
+    <%= link_to 'New channel', new_channel_path, class: 'btn' %>
+  </div>
+<% end %>     
+<% content_for :chat_panel do %>
+<div class="col s9 z-depth-2 height">
+  <h5><%= @channel.title %></h5>
+  
+  <div id="messages" data-channel-id="<%= @channel.id %>">
+    <%= render @channel.messages %>
+  </div>
+  
+  <%= form_for @message, url: '#' do |f| %>
+	<%= hidden_field_tag 'channel_id', @channel.id %>
+	  <div class="form-group form-bottom">
+	    <%= f.label :body %>
+	    <%= f.text_area :body, class: 'form-control' %>
+	    <small class="text-muted">From 2 to 1000 characters</small>
+	  </div>
+
+	<%= f.submit "Post", class: 'btn' %>
+  <% end %>
+<% end %>
+</div>	
+
+

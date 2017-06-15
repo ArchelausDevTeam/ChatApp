@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col m4">
+  	<span class="card-title"><%= $group.title %></span><br>
+    <small>Channels</small>
+      <ul class="collection">
+        <% @group_channels.each do |gc| %>
+          <li class="collection-item"><%= link_to gc.title, channel_path(gc.id) %></li>
+        <% end %>
+      </ul>
+      <%= link_to 'New channel', new_channel_path, class: 'btn' %>
+  </div>
+</div>
