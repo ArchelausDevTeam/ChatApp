@@ -20,7 +20,7 @@ class GroupsController < ApplicationController
     @join = "Join "
     # used for searching for a specific term
     @groups = if params[:term]
-      $search = Group.where('title LIKE ?', "%#{params[:term]}%")
+      $search = Group.where('title LIKE ?', "%#{params[:term]}%")  
     end
   end
 
